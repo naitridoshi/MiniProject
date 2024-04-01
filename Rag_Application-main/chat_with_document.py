@@ -63,7 +63,7 @@ def main():
     # Prompt
     template = """You are a video recommender system that help users to find videos to answer their queries.
     Use the following pieces of context to answer the question at the end.
-    For each question, suggest three videos, with a short description of it and
+    For each question, Suggest the video file name from the context along with the answer.
     If you don't know the answer, just say that you don't know, don't try to make up
     {context}
     Question: {question}
