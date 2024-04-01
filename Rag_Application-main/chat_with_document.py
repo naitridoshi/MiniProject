@@ -67,7 +67,8 @@ def main():
     If you don't know the answer, just say that you don't know, don't try to make up
     {context}
     Question: {question}
-    Your response:"""
+    Your response:
+    Video File: """
 
     QA_CHAIN_PROMPT = PromptTemplate(
         input_variables=["context", "question"],
@@ -99,11 +100,14 @@ def main():
         print(f"\n> Answer (took {round(end - start, 2)} s.):")
         em = model.encode([answer, docs[0].page_content])
 
-        print(answer)
-        print("\n> " + docs[0].metadata["source"] + ":")
-        print(docs[0].page_content)
-        score = cos_sim(em[0], em[1])
-        print("\n> "+f"Score :- {score}")
+        if (cos_sim(em[0], em[1]) > 0.80):
+            print(answer)
+            print("\n> " + docs[0].metadata["source"] + ":")
+            print(docs[0].page_content)
+            score = cos_sim(em[0], em[1])
+            print("\n> "+f"Score :- {score}")
+        else:
+            print("we have no such data regading your query, sorry !!")
 
 
 def parse_arguments():
